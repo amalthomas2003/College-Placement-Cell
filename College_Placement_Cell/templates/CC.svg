@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Created with Vectornator (http://vectornator.io/) -->
+<svg height="100%" stroke-miterlimit="10" style="fill-rule:nonzero;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;" version="1.1" viewBox="0 0 3886 3975" width="100%" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:vectornator="http://vectornator.io" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<path d="M1943 44.5C869.911 44.5 1.62033e-06 914.411 0 1987.5C0 3060.59 869.911 3930.5 1943 3930.5C3016.09 3930.5 3886 3060.59 3886 1987.5C3886 914.411 3016.09 44.5 1943 44.5ZM1943 212.5C2923.31 212.5 3718 1007.19 3718 1987.5C3718 2967.81 2923.31 3762.5 1943 3762.5C962.695 3762.5 168 2967.81 168 1987.5C168 1007.19 962.695 212.5 1943 212.5Z" id="Fill"/>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="3911" id="Filter" width="3911" x="-12.5" y="42">
+<feDropShadow dx="-3.67321e-05" dy="10" flood-color="#000000" flood-opacity="0.333" in="SourceGraphic" result="Shadow" stdDeviation="5"/>
+</filter>
+<path d="M1943 212.5C962.695 212.5 168 1007.19 168 1987.5C168 2967.81 962.695 3762.5 1943 3762.5C2923.31 3762.5 3718 2967.81 3718 1987.5C3718 1007.19 2923.31 212.5 1943 212.5ZM1922.59 763.781L2205.41 1272.38L2488.25 1780.94C2438.18 1824.64 2386.55 1866.68 2335.69 1909.56C2284.83 1952.44 2234.76 1996.16 2187.88 2043.12C2157.27 2073.79 2128.31 2106.18 2101.12 2139.94C2073.94 2173.7 2048.52 2208.83 2025 2245C2010.92 2266.66 1998.52 2289.63 1988.25 2313.47C1977.98 2337.31 1969.84 2361.99 1964.19 2387.06C1954.42 2430.39 1949.27 2474.48 1945.28 2518.75C1941.29 2563.02 1938.46 2607.48 1933.31 2651.56C1927.04 2604.91 1923.35 2557.77 1918.38 2510.88C1913.4 2463.98 1907.11 2417.32 1895.66 2371.62C1888.28 2342.2 1877.72 2313.5 1865 2285.69C1852.28 2257.87 1837.38 2230.94 1821.34 2205.03C1802.09 2173.94 1781.25 2143.55 1758.66 2114.53C1736.07 2085.51 1711.73 2057.83 1685.47 2032.12C1645.87 1993.36 1603.63 1957.4 1560.53 1922.34C1517.44 1887.29 1473.5 1853.16 1430.47 1818.03C1425.7 1814.14 1420.96 1810.23 1416.22 1806.31C1411.48 1802.4 1406.74 1798.48 1402.03 1794.53L1391.97 1785.12C1457.81 1660.1 1557.55 1467.29 1657.28 1274.47C1757.02 1081.65 1856.75 888.809 1922.59 763.781ZM618.156 1785.12C736.516 1821.58 857.664 1850.29 973.25 1894.47C1083.51 1936.61 1187.15 1993.78 1294.09 2043.44C1178.59 1917.7 1178.59 1917.71 1063.09 1791.97C1171.37 1853.04 1286.24 1904.07 1387.91 1975.22C1488.24 2045.43 1573.41 2134.4 1666.16 2214C1721.68 2274.51 1771.41 2340.69 1813.59 2410.78C1846.64 2465.7 1873.45 2525.07 1890.38 2586.62C1907.68 2701.24 1907.67 2701.23 1924.97 2815.84C1951.94 2727.35 1973.4 2637.07 2005.91 2550.38C2026.21 2496.22 2051.05 2443.13 2082.94 2394.62C2130.52 2322.25 2183.16 2252.43 2243.16 2189.53C2299.01 2130.98 2364.16 2081.41 2428.69 2032.16C2544.92 1943.44 2693.9 1869.77 2819.22 1800.84C2754.16 1862.27 2700.17 1921 2640.53 1987.5C2628.99 2000.37 2534.49 2085.4 2529.69 2101.88C2625.68 2058.14 2802.53 1949.36 2897.59 1903.38C3003.99 1851.91 3144.43 1830.81 3267.84 1794.53C3157.24 1887.43 3051.39 1986.05 2936.03 2073.22C2733.05 2226.59 2517.58 2363.59 2313.53 2515.59C2243.41 2567.83 2176.73 2624.76 2114.12 2685.47C2084.44 2714.26 2059.78 2748.06 2037.88 2782.91C1954.94 2914.87 1944.96 3061.29 1924.97 3211.22C1900.95 3042.96 1900.96 3042.95 1876.94 2874.69L1825.91 2766.94C1776.97 2709.6 1738.2 2642.2 1679.09 2594.94C1485.15 2439.84 1268.39 2313.93 1070.91 2163.19C914.482 2043.79 769.071 1911.15 618.156 1785.12Z" id="Fill_2"/>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="3575" id="Filter_2" width="3575" x="155.5" y="210">
+<feDropShadow dx="-3.67321e-05" dy="10" flood-color="#000000" flood-opacity="0.333" in="SourceGraphic" result="Shadow" stdDeviation="5"/>
+</filter>
+<path d="M1922.59 763.781C1856.75 888.809 1757.02 1081.65 1657.28 1274.47C1557.55 1467.29 1457.81 1660.1 1391.97 1785.12L1402.03 1794.53C1406.74 1798.48 1411.48 1802.4 1416.22 1806.31C1420.96 1810.23 1425.7 1814.14 1430.47 1818.03C1473.5 1853.16 1517.44 1887.29 1560.53 1922.34C1603.63 1957.4 1645.87 1993.36 1685.47 2032.12C1711.73 2057.83 1736.07 2085.51 1758.66 2114.53C1781.25 2143.55 1802.09 2173.94 1821.34 2205.03C1837.38 2230.94 1852.28 2257.87 1865 2285.69C1877.72 2313.5 1888.28 2342.2 1895.66 2371.62C1907.11 2417.32 1913.4 2463.98 1918.38 2510.88C1923.35 2557.77 1927.04 2604.91 1933.31 2651.56C1938.46 2607.48 1941.29 2563.02 1945.28 2518.75C1949.27 2474.48 1954.42 2430.39 1964.19 2387.06C1969.84 2361.99 1977.98 2337.31 1988.25 2313.47C1998.52 2289.63 2010.92 2266.66 2025 2245C2048.52 2208.83 2073.94 2173.7 2101.12 2139.94C2128.31 2106.18 2157.27 2073.79 2187.88 2043.12C2234.76 1996.16 2284.83 1952.44 2335.69 1909.56C2386.55 1866.68 2438.18 1824.64 2488.25 1780.94L2205.41 1272.38L1922.59 763.781Z" id="Fill_3"/>
+<filter color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse" height="1912.78" id="Filter_3" width="1121.28" x="1379.47" y="761.281">
+<feDropShadow dx="-3.67321e-05" dy="10" flood-color="#000000" flood-opacity="0.333" in="SourceGraphic" result="Shadow" stdDeviation="5"/>
+</filter>
+</defs>
+<clipPath id="ArtboardFrame">
+<rect height="3975" width="3886" x="0" y="0"/>
+</clipPath>
+<g clip-path="url(#ArtboardFrame)" id="Untitled" vectornator:layerName="Untitled">
+<g filter="url(#Filter)" vectornator:layerName="Curve 1" vectornator:shadowAngle="1.5708" vectornator:shadowColor="#000000" vectornator:shadowOffset="10" vectornator:shadowOpacity="0.333" vectornator:shadowRadius="10">
+<use fill="#000000" fill-opacity="0" fill-rule="nonzero" stroke="none" xlink:href="#Fill"/>
+<mask height="3886" id="StrokeMask" maskUnits="userSpaceOnUse" width="3886" x="0" y="44.5">
+<rect fill="#000000" height="3886" stroke="none" width="3886" x="0" y="44.5"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask)" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" xlink:href="#Fill"/>
+</g>
+<g filter="url(#Filter_2)" vectornator:layerName="Curve 3" vectornator:shadowAngle="1.5708" vectornator:shadowColor="#000000" vectornator:shadowOffset="10" vectornator:shadowOpacity="0.333" vectornator:shadowRadius="10">
+<mask height="3550" id="StrokeMask_2" maskUnits="userSpaceOnUse" width="3550" x="168" y="212.5">
+<rect fill="#000000" height="3550" stroke="none" width="3550" x="168" y="212.5"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill_2"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask_2)" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" xlink:href="#Fill_2"/>
+</g>
+<g filter="url(#Filter_3)" vectornator:layerName="Curve 4" vectornator:shadowAngle="1.5708" vectornator:shadowColor="#000000" vectornator:shadowOffset="10" vectornator:shadowOpacity="0.333" vectornator:shadowRadius="10">
+<mask height="1887.78" id="StrokeMask_3" maskUnits="userSpaceOnUse" width="1096.28" x="1391.97" y="763.781">
+<rect fill="#000000" height="1887.78" stroke="none" width="1096.28" x="1391.97" y="763.781"/>
+<use fill="#ffffff" fill-rule="evenodd" stroke="none" xlink:href="#Fill_3"/>
+</mask>
+<use fill="none" mask="url(#StrokeMask_3)" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="20" xlink:href="#Fill_3"/>
+</g>
+</g>
+</svg>

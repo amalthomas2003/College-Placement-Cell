@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Details</title>
+    <script src="https://cdn.tiny.cloud/1/x6urwwlk13qnj3s9wojizfd8tesswrsqvt701qec9ljquf0b/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='post_interview_questions_style.css') }}">
+</head>
+<body>
+    <script>
+        tinymce.init({
+          selector: 'textarea',
+          plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+          tinycomments_mode: 'embedded',
+          tinycomments_author: 'Author name',
+          mergetags_list: [
+            { value: 'First.Name', title: 'First Name' },
+            { value: 'Email', title: 'Email' },
+          ],
+          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject("See docs to implement AI Assistant")),
+        });
+      </script>
+
+    <div class="container">
+        <h1>Post Question</h1>
+        <form method="post" action="/student_dashboard/post_questions" onsubmit="return validateForm()">
+            <label for="tags">Tags:</label>
+            <input type="text" id="tags" name="tags" placeholder="Tags(csv)" required>
+            <label for="tags">Company name:</label>
+            <input type="text" id="c_name" name="c_name" placeholder="Company Name" required>
+            <textarea id="editor"></textarea>
+            <input type="hidden" name="content" id="content-input">
+            <button id="save-button" type="submit">Save</button>
+        </form>
+        
+    </div>
+    <script src="{{ url_for('static', filename='post_interview_questions.js') }}">
+        
+    </script>
+</body>
+</html>

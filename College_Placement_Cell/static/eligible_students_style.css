@@ -1,0 +1,55 @@
+
+/* setting the gradient */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, rgb(200, 200, 200), #d3d3d3, rgb(201, 201, 201));
+    margin: 0;
+    padding: 0;
+}
+
+
+
+
+
+h1 {
+    text-align: center;
+    color: #000609;
+    padding: 20px;
+    background-color: white;
+    margin: 0;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+table, th, td {
+    border: 1px solid #3498db;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(odd) {
+    background-color: rgb(255, 255, 255); /* Light gray for odd rows */
+    color: black; /* Black text color for better visibility */
+}
+
+tr:nth-child(even) {
+    background-color: rgba(209, 209, 209, 0.397); /* White for even rows */
+    color: black;
+}

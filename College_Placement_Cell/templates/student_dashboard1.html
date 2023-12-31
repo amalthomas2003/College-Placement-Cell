@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        #dashboard-container {
+            display: flex;
+            flex: 1;
+        }
+
+        #left-section {
+            flex: 1;
+            background-color: #f0f0f0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #user-details {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #user-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+
+        #logout-btn {
+            background-color: #ff6347;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #right-section {
+            flex: 2;
+            padding: 20px;
+        }
+
+        .top-column {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .top-column .compartment {
+            flex: 1;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        #dashboard-title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .row {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .compartment {
+            flex: 1;
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        .dashboard-btn {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+    <title>Student Dashboard</title>
+</head>
+<body>
+
+    <div id="dashboard-container">
+        <div id="left-section">
+            <div id="user-details">
+                <img id="user-image" src="{{ url_for('student_images', filename=student_image) }}" alt="User Image" style="width: 150px; height: 150px; object-fit: cover; border-radius: 50%;">
+                <p><strong>UID:</strong> <span id="name">{{student_uid}}</span></p>
+                <p><strong>NAME:</strong> <span id="name">{{student_name | upper}}</span></p>
+                <p><strong>BRANCH:</strong> <span id="branch">{{student_branch | upper}}</span></p>
+                <p><strong>CGPA:</strong> <span id="cgpa">{{student_cgpa}}</span></p>
+                <p><strong>DOB:</strong> <span id="dob">{{student_dob}}</span></p>
+                <p><strong>CC Points:</strong> <span id="name">{{cc_points}}</span></p>
+
+
+            </div>
+            <button id="logout-btn" onclick="logout()">LOGOUT</button>
+        </div>
+
+        <div id="right-section">
+            <div class="top-column">
+                <div class="compartment">
+                    <img src="path/to/college/logo.png" alt="College Logo">
+                </div>
+                <div class="compartment">
+                    <div id="dashboard-title">STUDENT DASHBOARD</div>
+                </div>
+                <div class="compartment">
+                    <img src="path/to/placement/cell/logo.png" alt="Placement Cell Logo">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="compartment">
+                    <img src="path/to/company1/logo.png" alt="Company 1 Logo">
+                </div>
+                <button class="dashboard-btn" onclick="redirectToEligibleCompanies()">Eligible Companies</button>
+            </div>
+
+            <div class="row">
+                <div class="compartment">
+                    <img src="path/to/questions/logo.png" alt="Post Interview Questions Logo">
+                </div>
+                <button class="dashboard-btn" onclick="redirectToPostInterviewQuestions()">Post Interview Questions</button>
+            </div>
+
+            <div class="row">
+                <div class="compartment">
+                    <img src="path/to/questions/view/logo.png" alt="View Interview Questions Logo">
+                </div>
+                <button class="dashboard-btn" onclick="redirectToViewInterviewQuestions()">View Interview Questions</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function logout() {
+            
+            alert("Logout clicked!");  
+            window.location.href = '/student_dashboard/logout';
+        }
+
+        function redirectToEligibleCompanies() {
+            window.location.href = '/student_dashboard/eligible_companies';
+            //alert("Redirecting to Eligible Companies");
+        }
+
+        function redirectToPostInterviewQuestions() {
+            window.location.href='/student_dashboard/post_questions';
+            //alert("Redirecting to Post Interview Questions");
+        }
+
+        function redirectToViewInterviewQuestions() {
+            window.location.href='/student_dashboard/view_questions';
+        }
+    </script>
+
+</body>
+</html>

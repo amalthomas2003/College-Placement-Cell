@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Scrutiny</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='scrutiny_style.css') }}">
+    <style>
+        .accepted {
+            background-color: lightgreen;
+        }
+
+        .rejected {
+            background-color: lightcoral;
+        }
+
+        .waiting {
+            background-color: rgb(255, 255, 167);
+        }
+
+        h1 {
+            display: inline-block;
+            margin-right: 20px; /* Adjust the margin between the text and button */
+        }
+
+        #downloadButton {
+            padding: 20px 20px; /* Adjust padding for height and width */
+            background-color: rgb(0, 41, 247);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            float: right;
+        }
+
+        #downloadButton:hover {
+            background-color: #000000;
+        }
+
+        /* Styles for the decision buttons */
+        form button {
+            padding: 10px 15px; /* Adjust padding for height and width */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px; /* Adjust margin between buttons */
+        }
+
+        button[name="accept"] {
+            background-color: green;
+            color: white;
+        }
+
+        button[name="reject"] {
+            background-color: red;
+            color: white;
+        }
+
+        button[name="wait"] {
+            background-color: yellow;
+            color: black;
+        }
+
+    </style>
+</head>
+<body>
+
+<h1>Application Scrutiny</h1>
+<!-- Add a button to trigger the download -->
+<button id="downloadButton">Download Table</button>
+
+<script>
+    document.getElementById('downloadButton').addEventListener('click', function() {
+        downloadTable();
+    });
+
+    function downloadTable() {
+        // Extract the table data
+        const table = document.querySelector('table');
+        const rows = Array.from(table.querySelectorAll('tr'));
+        const csvData = rows.map(row => Array.from(row.children).map(cell => cell.innerText).join(',')).join('\n');
+
+        // Create a Blob with the CSV data
+        const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+
+        // Create a link element and trigger the download
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = 'application_table.csv';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+</script>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Serial No</th>
+            <th>User ID</th>
+            <th>Student Name</th>
+            <th>Branch</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for student in students %}
+            <tr id="row_{{ student[0] }}" class="{% if student[3] == 1 %}accepted{% elif student[3] == 0 %}rejected{% elif student[3] == 2 %}waiting{% endif %}">
+                <td>{{ loop.index }}</td>
+                <td>{{ student[0] }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[2] }}</td>
+                <td>
+                    {% if student[3] == 1 %}
+                        Accepted
+                    {% elif student[3] == 0 %}
+                        Rejected
+                    {% elif student[3] == 2 %}
+                        Waiting
+                    {% else %}
+                        Pending
+                    {% endif %}
+                </td>
+                <td>
+                    <form action="{{ url_for('process_decision') }}" method="post">
+                        <input type="hidden" name="user_id" value="{{ student[0] }}">
+                        <button type="submit" name="decision" value="accept" {% if student[3] == 1 %}disabled{% endif %}>Accept</button>
+                        <button type="submit" name="decision" value="reject" {% if student[3] == 0 %}disabled{% endif %}>Reject</button>
+                        <button type="submit" name="decision" value="wait" {% if student[3] == 2 %}disabled{% endif %}>Wait</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

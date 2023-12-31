@@ -1,0 +1,200 @@
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 70px; 
+    height: auto;
+    margin-right: 10px;
+}
+
+.header-right {
+    margin-left: auto;
+}
+
+.header-right-logo {
+    width: 70px; 
+    height: auto; 
+}
+
+#dashboard-container {
+    display: flex;
+    flex: 1;
+}
+
+#sidebar {
+    width: 25%;
+    min-width: 200px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#right-section .row {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: auto;
+}
+
+.top-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.row {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.dashboard-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#user-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar p {
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%; 
+        min-width: 0;
+    }
+}
+
+.compartment {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Ripple Button Styles */
+.btn1 {
+    position: relative;
+    display: inline-block;
+    padding: 18px 36px;
+    margin: 10px;
+    color: #fff;
+    font-size: 1.6rem; 
+    letter-spacing: 2px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    min-width: 250px; 
+    width: calc(100% - 40px); 
+}
+
+.btn1--ripple {
+    background: linear-gradient(90deg, rgb(118, 60, 159), #e855fc);
+    overflow: hidden;
+}
+
+.btn1--ripple span {
+    position: absolute;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: rippleAnimation 1s linear infinite;
+}
+
+/*Normal Buttons*/
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+}
+  
+.btn {
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
+    background-image: linear-gradient(135deg, #ec580f 0%, #ef0909 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    color: white;
+}
+  
+.btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+}
+  
+.btn:active {
+    opacity: 0.5;
+}
+
+
+
+
+
+@keyframes rippleAnimation {
+    0% {
+        width: 0px;
+        height: 0px;
+        opacity: 0.5;
+    }
+    100% {
+        width: 500px;
+        height: 500px;
+        opacity: 0;
+    }
+}

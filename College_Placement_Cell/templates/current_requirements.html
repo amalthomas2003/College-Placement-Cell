@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Current Requirements</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='current_requirements_style.css') }}">
+</head>
+<body>
+    <div class="header">
+        <h2>Current Requirements</h2>
+    </div>
+    <div class="container">
+        <div class="requirement-box">
+            <div class="cgpa">
+                Min CGPA: {{ requirement1 }}
+            </div>
+            <div class="dob">
+                Max DOB: {{ requirement2 }}
+            </div>
+            <div class="batch">
+                Batch: {{ requirement3 }}
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

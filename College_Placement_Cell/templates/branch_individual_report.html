@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 95vh; /* Ensure the body takes up the full viewport height */
+        }
+
+        .container {
+            display: flex;
+            width: 100%;
+            max-width: 1200px; 
+        }
+
+        .table-container,
+        .graph-container {
+            flex: 1;
+        }
+
+        table {
+            width: 95%;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 16px;
+            text-align: left;
+            color: #333;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        .box1 {
+            width: 100%;
+            max-width: 100%;
+            margin: 20px 0;
+        }
+
+        .box1 img {
+            width: 105%;
+            height: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        #download-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 16px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
+            background: linear-gradient(to right, #0ef1f1, #52f498); /* Light cyan to light green gradient */
+        }
+
+        #download-btn:hover {
+            background: linear-gradient(to right, #ea9b12, #9431f7); /* Light cyan to light green gradient on hover */
+        }
+    </style>
+    <title>Student Data</title>
+</head>
+<body>
+    <div class="container">
+        <div class="table-container">
+            <!-- Add a download button -->
+            <a id="download-btn" href="#" onclick="downloadTable()">Download as Excel</a>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Branch</th>
+                        <th>Number Of Companies</th>
+                        <th>Number Of Placements</th>
+                        <th>Number Of Rejections</th>
+                        <th>Number of Pendings</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for row in branch_individual_report %}
+                    <tr>
+                        <td>{{ row[3] | upper }}</td>
+                        <td>{{ row[0] }}</td>
+                        <td>{{ row[1] }}</td>
+                        <td>{{ row[2] }}</td>
+                        <td>
+                            {% if row[1] is not none and row[2] is not none %}
+                                {{ row[1] - row[2] }}
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="graph-container">
+            <div class="box1">
+                <img src="data:image/png;base64,{{ graph_image }}" alt="Bar Graph">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function downloadTable() {
+            // Create a new Excel file with the table data
+            const table = document.querySelector('table');
+            const rows = table.querySelectorAll('tr');
+            const csvData = [];
+
+            // Loop through the table rows and cells to build the CSV data
+            rows.forEach((row) => {
+                const rowData = [];
+                const cells = row.querySelectorAll('td, th');
+                cells.forEach((cell) => {
+                    rowData.push(cell.textContent);
+                });
+                csvData.push(rowData.join(','));
+            });
+
+            const csvContent = 'data:text/csv;charset=utf-8,' + csvData.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'branch_data.csv';
+            a.click();
+        }
+    </script>
+</body>
+</html>

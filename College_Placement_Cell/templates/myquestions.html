@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Questions</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='myquestions_style.css') }}">
+</head>
+<body>
+    <h1>My Questions</h1>
+
+    <div class="question-container">
+        {% for question in questions %}
+            <div class="question-box" style="background-color: {{ '#c8e6c9' if question[3] == 1 else '#ffcdd2' if question[3] == 0 else '#fff9c4' }}">
+                <p>Question ID: {{prefix}}{{ question[0] }}{{suffix}}</p>
+                <p>Company Name: {{ question[1] | upper }}</p>
+                <p>Date: {{ question[2] }}</p>
+                <p>Status: <span id="status_{{ question[0] }}"></span></p>
+                <form action="{{ url_for('view_the_question_endpoint') }}" method="post" style="display: inline;">
+                    <input type="hidden" name="q_id" value="{{ question[0] }}">
+                    <button type="submit" name="action" value="apply" class="see-question-btn">View Question</button>
+                </form>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        {% for question in questions %}
+            document.getElementById('status_{{ question[0] }}').innerText = getStatusText({{ question[3] }});
+        {% endfor %}
+
+        function getStatusText(status) {
+            if (status === 1) {
+                return 'Accepted';
+            } else if (status === 0) {
+                return 'Rejected';
+            } else {
+                return 'Pending';
+            }
+        }
+
+    </script>
+
+    <script src="{{ url_for('static', filename='myquestions.js') }}"></script>
+</body>
+</html>

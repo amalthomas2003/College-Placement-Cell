@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='questions_style.css') }}">   
+    <title>Student Questions</title>
+</head>
+<body>
+    <!-- Search Container and Button -->
+    <div id="search-container">
+        <input type="text" id="search-text" placeholder="Search for tags,question id,student name... ">
+        <button class="search-button" onclick="searchQuestions()">Search</button>
+        <button class="home-button" onclick="redirectToHome()">
+            <img src="{{ url_for('static', filename='home.png') }}" alt="Home Icon"> 
+        </button>
+        
+    </div>
+
+    <hr class="line-above-main">
+    <hr class="line-above-main1">
+
+
+
+    {% for question in questions_data %}
+        <div id="questions-container">
+            <div class="question-box">
+                <div class="company">{{ question[5] | upper}}</div> 
+                <h5>ID:{{q_prefix}}{{question[7]}}{{q_suffix}}</h5>
+                <div class="student-info" style='font-family: {{ question[8] }};color: {{ question[9] }};font-style: {{ question[10] }};font-weight: {{ question[11] }};font-size: {{ question[12] }}; ' >
+                    <div class="name">{{ question[0] | upper}}</div> <!-- Name -->
+                    <div class="id">{{ question[1] }}</div> <!-- ID -->
+                </div>
+                <hr class="line-above">
+
+                <div class="question">{{ question[2] | safe }}</div> <!-- Question -->
+                <hr class="line-above">
+
+                <div class="tag-info">
+                    <div class="tags">Tags: {{ question[4] }}</div> 
+                    <div class="date">{{ question[3] }}</div> 
+                </div>
+            </div>
+        </div>
+
+    {% endfor %}
+
+
+
+    <script>
+        function searchQuestions() {
+            // Get the search text from the input field
+            var searchText = document.getElementById('search-text').value;
+
+            // Redirect to the search route with the search text
+            window.location.href = "/student_dashboard/view_question/questions_search?search_text=" + searchText;
+        }
+
+        function redirectToHome(){
+            window.location.href = "/student_dashboard"
+        }
+    </script>
+    <script src="{{ url_for('static', filename='pagination.js') }}"></script>
+    
+
+</body>
+</html>

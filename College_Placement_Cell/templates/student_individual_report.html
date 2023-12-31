@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 95%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        #download-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px;
+            background-color: #4caf50;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        #download-btn:hover {
+            background-color: #2ac294;
+        }
+    </style>
+    <title>Student Data</title>
+</head>
+<body>
+    <!-- Add a download button -->
+    <a id="download-btn" href="#" onclick="downloadTable()">Download as Excel</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Uid</th>
+                <th>Name</th>
+                <th>Branch</th>
+                <th>Applied Companies</th>
+                <th>Number of Placements</th>
+                <th>Placed Companies</th>
+                <th>Number of Rejections</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+                <td>{{ row[2] }}</td>
+                <td>{{ row[3] }}</td>
+                <td>{{ row[4] | upper }}</td>
+                <td>{{ row[5] | upper }}</td>
+                <td>{{ row[6] | upper}}</td>
+                <td>{{ row[7] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        function downloadTable() {
+            // Create a new Excel file with the table data
+            const table = document.querySelector('table');
+            const rows = table.querySelectorAll('tr');
+            const csvData = [];
+
+            // Loop through the table rows and cells to build the CSV data
+            rows.forEach((row) => {
+                const rowData = [];
+                const cells = row.querySelectorAll('td, th');
+                cells.forEach((cell) => {
+                    rowData.push(cell.textContent);
+                });
+                csvData.push(rowData.join(','));
+            });
+
+            // Create a Blob containing the CSV data
+            const csvContent = 'data:text/csv;charset=utf-8,' + csvData.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+
+            // Create a download link and trigger a click to start the download
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'student_data.csv';
+            a.click();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+/* dashboard_style.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+h1 {
+    color: #333;
+}
+
+.results-container {
+    margin-top: 20px; /* Adjusted margin top */
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    width: 80%;
+    max-width: 800px;
+}
+
+.company-result {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+}
+
+.company-name {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.status {
+    color: #007bff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.status.accepted {
+    color: #28a745;
+}
+
+.status.rejected {
+    color: #dc3545;
+}
+
+.status.waiting {
+    color: #ffc107;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company HR Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='company_hr_dashboard_style.css') }}">
+</head>
+<body>
+    <header>
+        <h1 id="company-header">{{ company_name|upper }}</h1>
+    </header>
+    
+    <div class="container">
+        <div class="box">
+            <a href="/hr_dashboard/set_requirements">Change Requirements</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/applied_candidates">Applied Candidates</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/current_requirements">Current Requirements</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/elgible_students">Eligible Students</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/toggle_power">{{ "Turn Off" if power == 1 else "Turn On" }}</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/logout">Log Out</a>
+        </div>
+
+
+        <div class="box">
+            <a href="/hr_dashboard/change_company_details">edit company details</a>
+        </div>
+
+
+        <div class="box">
+            <a href="/hr_dashboard/change_interview_details">edit interview details</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/view_interview_details">view company details</a>
+        </div>
+
+        <div class="box">
+            <a href="/hr_dashboard/view_company_description">view company description</a>
+        </div>
+        
+
+    </div>
+</body>
+</html>

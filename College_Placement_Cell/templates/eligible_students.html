@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eligible Students</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='eligible_students_style.css') }}">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        #downloadButton {
+            padding: 20px 20px;
+            background-color: rgb(0, 76, 255);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            margin-top: 3px;
+        }
+
+        #downloadButton:hover {
+            background-color: #000000;
+        }
+
+        .table {
+            width: 100%; /* Make the table full width */
+            max-width: 1550px; /* Set a maximum width if needed */
+            margin: 2 auto; /* Center the table horizontally */
+        }
+    </style>
+</head>
+<body>
+    <h1>Eligible Students</h1>
+    <button id="downloadButton">Download Table</button>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Student User ID</th>
+                <th>Student Name</th>
+                <th>CGPA</th>
+                <th>Dob</th>
+                <th>Batch</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in eligible_students %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+        document.getElementById('downloadButton').addEventListener('click', function() {
+            downloadTable();
+        });
+
+        function downloadTable() {
+            const table = document.querySelector('.table');
+            const rows = Array.from(table.querySelectorAll('tr'));
+            const csvData = rows.map(row => Array.from(row.children).map(cell => cell.innerText).join(',')).join('\n');
+
+            const blob = new Blob([csvData], { type: 'text/csv;charset=utf-8;' });
+
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = 'eligible_students_table.csv';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>

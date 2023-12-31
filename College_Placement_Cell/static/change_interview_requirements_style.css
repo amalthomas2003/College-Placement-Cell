@@ -1,0 +1,74 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #3498db, #66a0d2, #3498db);
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #000; /* Black text color */
+    padding: 20px;
+    background-color: white;
+    margin: 0;
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.container {
+    text-align: center;
+    margin: 0 auto;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    max-width: 600px; /* Adjust the max width as needed */
+    margin-top: 20px;
+}
+
+form {
+    padding: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #000; /* Black text color */
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+input[type="submit"] {
+    background-color: #3498db; /* Blue submit button color */
+    color: #fff; /* White text color */
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+input[type="submit"]:hover {
+    background-color: #258cd1; /* Slightly darker blue on hover */
+}
+/* Add this to your existing CSS file or create a new one */
+.label-big {
+    font-size: 20px; /* Increase the font size for labels */
+}
+
+.input-big {
+    font-size: 18px; /* Increase the font size for input fields */
+}
+
+/* Rest of your CSS styles remain unchanged */

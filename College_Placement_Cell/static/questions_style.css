@@ -1,0 +1,162 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+#questions-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.question-box {
+    border: 2px solid #3498db;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px;
+    width: 80%; /* Takes 80% of the screen width */
+    box-sizing: border-box;
+    background-color: #fff;
+    transition: transform 0.3s;
+}
+
+.question-box:hover {
+    transform: scale(1.05);
+}
+
+.company {
+    font-size: 24px; /* Larger font for tags */
+    font-weight: bold;
+    color: rgb(0, 0, 0); /* Green color for tags */
+    text-align: center;
+}
+
+.question {
+    font-size: 18px; /* Slightly smaller font for questions */
+    margin-top: 10px;
+}
+
+.student-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
+    color: #888;
+    margin-top: 10px;
+}
+.tags {
+    color: #888;
+    margin-top: 10px;
+}
+
+
+#pagination-container {
+    margin-top: 20px;
+}
+
+.tag-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+#search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px; /* Add top padding for the search box */
+    position: relative; /* Set position to relative for absolute positioning of neon light */
+}
+
+#search-text {
+    padding: 10px;
+    font-size: 16px;
+    width: 60%; /* Reduce the search bar width to leave space for buttons */
+    border: 2px solid #3498db;
+    border-radius: 20px; /* Add border-radius for curved edges */
+    transition: border-color 0.3s; /* Add transition effect for smoother hover */
+    margin-right: 10px; /* Add right margin to separate search bar and button */
+}
+
+#search-text:hover {
+    border-color: #f39c12; /* Change border color on hover for neon light effect */
+}
+
+.search-button,
+.home-button {
+    padding: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 20px; /* Add border-radius to make the button curved */
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.search-button {
+    background: linear-gradient(to right, rgb(203, 203, 203), rgb(223, 223, 223));
+    color: black;
+}
+
+
+
+.home-button {
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.home-button img {
+    width: 20px;
+    height: auto;
+    margin-right: 5px;
+}
+
+
+.home-button img {
+    width: 70px;       /* Adjust the width of the home icon */
+    height: 70px;      /* Adjust the height of the home icon */
+    margin-right: 8px; /* Add margin to separate the icon from text */
+}
+
+.line-above-main {
+    border: none;
+    height: 5px; /* Adjust the height as needed */
+    background: linear-gradient(
+        to right,
+        #2c3e50,
+        #34495e,
+        #257277,
+        #34290e,
+        #181432,
+        #922b21,
+        #633d2e,
+        #512e2a,
+        #4d4b4e,
+        #6e2c2b
+    ); /* Gradient color for the line */
+    border-radius: 0px; /* Rounded corners */
+}
+
+.line-above-main1 {
+    border: none;
+    height: 10px; /* Adjust the height as needed */
+    background: linear-gradient(
+        to right,
+        #2c3e50,
+        #34495e,
+        #257277,
+        #34290e,
+        #181432,
+        #922b21,
+        #633d2e,
+        #512e2a,
+        #4d4b4e,
+        #6e2c2b
+    ); /* Gradient color for the line */
+    border-radius: 0px; /* Rounded corners */
+}

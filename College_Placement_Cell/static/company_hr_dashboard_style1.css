@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Use min-height instead of height */
+    background: linear-gradient(135deg, #2980b9, #6dd5fa);
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    max-width: 100%; /* Ensure it doesn't exceed the viewport width */
+    overflow-y: auto; /* Make it scrollable if content exceeds viewport height */
+}
+
+
+.box {
+    width: 45%;
+    min-height: 200px;
+    background-color: #fff;
+    margin: 2.5%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s;
+}
+
+.box a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+    color: white;
+}
+
+#company-header {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 2rem;
+}

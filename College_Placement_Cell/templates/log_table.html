@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log Table</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            font-size: 14px;
+            color: #333;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: #fff;
+            text-transform: uppercase;
+        }
+
+        #download-btn {
+            display: block;
+            margin: 20px auto;
+            padding: 12px;
+            background-color: #1ba28e;
+            color: #fff;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #download-btn:hover {
+            background-color: #056d4e;
+        }
+    </style>
+</head>
+<body>
+    <a id="download-btn" href="#" onclick="downloadTable()">Download as Excel</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>Designation</th>
+                <th>Login Date</th>
+                <th>Login Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log_entry in log_entries %}
+                <tr>
+                    <td>{{ log_entry[0] }}</td>
+                    <td>{{ log_entry[1] }}</td>
+                    <td>{{ log_entry[2] }}</td>
+                    <td>{{ log_entry[3] }}</td>
+                    <td>{{ log_entry[4] }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <script>
+        function downloadTable() {
+            const table = document.querySelector('table');
+            const rows = table.querySelectorAll('tr');
+            const csvData = [];
+
+            rows.forEach((row) => {
+                const rowData = [];
+                const cells = row.querySelectorAll('td');
+                cells.forEach((cell) => {
+                    rowData.push(cell.textContent);
+                });
+                csvData.push(rowData.join(','));
+            });
+
+            const csvContent = 'data:text/csv;charset=utf-8,' + csvData.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'log_table_data.csv';
+            a.click();
+        }
+    </script>
+</body>
+</html>

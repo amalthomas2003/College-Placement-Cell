@@ -1,0 +1,59 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #333;
+}
+
+.question-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.question-box {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 10px;
+    width: 300px;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out, border-color 0.5s ease-in-out;
+}
+.question-box:hover {
+    background-color: #000000;
+    transform: scale(1.05);
+    border-color: rgb(0, 0, 0); /* Border color on hover */
+}
+.status-buttons button {
+    margin-top: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.status-buttons button:hover {
+    background-color: #ddd;
+}
+.see-question-btn {
+    /* Your styling rules for the "See Question" button */
+    background: linear-gradient(to right, #000000, #423535 ); /* Black to Grey gradient */
+    color: white; /* White text color */
+    padding: 10px 20px; /* Padding for better appearance */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Cursor style on hover */
+}
+
+.see-question-btn:hover {
+    /* Styling when hovering over the button */
+    background: linear-gradient(to right, #3f1b1b, #000000 ,#5a2c2c); /* Grey to Black gradient */
+}

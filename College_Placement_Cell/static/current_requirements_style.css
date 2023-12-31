@@ -1,0 +1,39 @@
+/* Add this to your existing CSS file or create a new one */
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #3498db, #66a0d2, #3498db);
+    margin: 0;
+    padding: 0;
+}
+
+
+.header {
+    background: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #000;
+}
+
+.container {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%; /* Set the container to the viewport height */
+}
+
+.requirement-box {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.requirement,
+.description {
+    font-size: 35px;
+    color: #000;
+    margin-top: 50px;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='company_hr_dashboard_style.css') }}">
+    <title>Career Connect - Company Dashboard</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="brand">
+                <h1>Career Connect</h1>
+                
+            </div>
+            <div class="user-profile">
+                <div class="profile-wrapper">
+                    <img class="profile-image" src="static/settings.png" alt="Profile Photo" onclick="toggleDropdown()">
+                    <div class="dropdown-content" id="dropdownContent">
+                        <a href="#" style="--link-color: #DADAD9;">Edit Account</a>
+                        <a href="#" style="--link-color: #DADAD9;">Change Password</a>
+                        <a href="/hr_dashboard/logout" class="logout-btn" style="--link-color: red;">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content">
+        <div class="box-1">
+            <h2>Company Description</h2>
+            <p>{{company_description | safe}}</p>
+        </div>
+        
+
+
+        <div class="box-1">
+            <h2>Interview Details</h2>
+            <p>{{interview_detail | safe}}</p>
+        </div>
+
+        <div class="box">
+            <h2>Functional Dashboard</h2>
+            <p>Date and Time: <span id="datetime"></span></p>
+            <button class="button-28" id="powerButton" onclick="TogglePower()">{{power}} </button>
+            <button class="button-28" onclick="openEditCompanyDescription()">Edit Company Description</button>
+            <button class="button-28" onclick="openEditInterviewDetails()">Edit Interview Details</button>
+        </div>
+        
+
+
+        <div class="box">
+            <h2>Eligibility Requirements</h2>
+            <p><strong>CGPA Requirement:</strong> {{min_cgpa}} CGPA</p>
+            <p><strong>Selected Branches:</strong>{{branch}}</p>
+            <p><strong>Graduation Year:</strong>{{graduation_year}}</p>
+
+            <button class="button-28" role="button" onclick="openPopup()">Edit Requirements</button>
+        </div>
+
+              
+        <div class="box">
+            <h2>Student List</h2>
+            <button class="button-28" role="button" onclick="navigateToEligible()">View Eligible Students</button>
+            <button class="button-28" role="button" onclick="navigateToApplied()">View Applied Students</button>
+            <button class="button-28" role="button" onclick="navigateToScrutiny()">Applicaion Scrutiny</button>
+        </div>
+        
+
+    </div>
+    <!-- Requirement Edit Popup -->
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Edit Eligibility Requirements</h2>
+            <form id="requirementsForm" method="post" action="/hr_dashboard/set_requirements">
+                <div class="form-group">
+                    <label for="cgpa">Minimum CGPA:</label>
+                    <input type="number" id="cgpa" name="cgpa" step="0.1" min="0" max="10">
+                    <div id="cgpaError" class="error-message"></div>
+                </div>
+                <!-- New text box -->
+                <div class="form-group">
+                    <label for="additionalRequirement">Choose Departments:</label>
+                    <input type="text" id="additionalRequirement" name="additionalRequirement" placeholder="Branch(eg.CU,ME,EE)">
+                </div>
+                <div class="form-group">
+                    <label for="passoutyear">Passout Year:</label>
+                    <input type="text" id="passoutyear" name="passoutyear" placeholder="Graduation Year">
+                </div>
+                <button class="save-button" type="submit">Save</button>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Description Edit Popup -->
+    <div id="editDescriptionPopup" class="popup">
+        <div class="popup-content">
+            <span class="close" onclick="closeEditDescriptionPopup()">&times;</span>
+            <h2>Edit Company Description</h2>
+            <textarea id="companyDescription" rows="4" placeholder="Enter company description"></textarea>
+            <button class="save-button" onclick="saveDescription()">Save</button>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script src="static/company_hr_dashboard.js"></script>
+</body>
+</html>

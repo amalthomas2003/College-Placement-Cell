@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Results</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='results_style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .results-container {
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 600px;
+        }
+
+        .company-result {
+            margin-bottom: 10px;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .company-name {
+            font-weight: bold;
+        }
+
+        .status {
+            color: #007bff;
+        }
+
+        .status.accepted {
+            color: #28a745;
+        }
+
+        .status.rejected {
+            color: #dc3545;
+        }
+
+        .status.waiting {
+            color: #ffc107;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Interview Results</h1>
+
+<div class="results-container">
+    {% for result in interview_results %}
+        <div class="company-result">
+            <span class="company-name">{{ result[0] | upper }}</span>
+            <span class="status {% if result[1] == 1 %}accepted{% elif result[1] == 0 %}rejected{% else %}waiting{% endif %}">
+                {% if result[1] == 1 %}
+                    Accepted
+                {% elif result[1] == 0 %}
+                    Rejected
+                {% else %}
+                    Waiting
+                {% endif %}
+            </span>
+        </div>
+    {% endfor %}
+</div>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+/* Reset some default styles for better consistency */
+body, h1, h2, ul, li, button {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Global styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #3498db; /* Blue color */
+}
+
+/* Company list styles */
+.company-list {
+    list-style-type: none;
+}
+
+.company-list li {
+    background-color: #ecf0f1; /* Light gray background */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    position: relative;
+}
+
+.company-list li:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Applied message styles */
+.Applied_message {
+    background-color: #2ecc71; /* Green color */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+/* Button styles */
+button {
+    background-color: #3498db; /* Blue color */
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker blue color on hover */
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    .company-list li {
+        padding: 10px;
+    }
+}
+.company-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column; /* Adjust the direction to column */
+}
+
+.company-list li {
+    background-color: #ecf0f1; /* Light gray background */
+    border-radius: 8px;
+    margin-bottom: 15px;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between; /* Align items to the right */
+    align-items: center; /* Center vertically */
+    position: relative;
+}
+
+/* Applied message styles */
+.Applied_message {
+    background-color: #2ecc71; /* Green color */
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+/* Button styles */
+button {
+    background-color: #3498db; /* Blue color */
+    color: #fff;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #2980b9; /* Darker blue color on hover */
+}

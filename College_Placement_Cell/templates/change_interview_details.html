@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Details</title>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='change_interview_details_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Interview Details</h1>
+        <form method="post" action="/hr_dashboard/change_interview_details">
+            <!-- Add interview date input -->
+            <label for="interview-date">Interview Date:</label>
+            <input type="date" id="interview-date" name="interview_date" required>
+            <label for="last-date">Application Deadline:</label>
+            <input type="date" id="last_date" name="last_date" required>
+            
+            <!-- Add TinyMCE editor -->
+            <textarea id="editor"></textarea>
+            
+            <!-- Hidden input to store editor content -->
+            <input type="hidden" name="content" id="content-input">
+            
+            <!-- Submit button -->
+            <button id="save-button" type="submit">Save</button>
+        </form>
+    </div>
+    <script src="{{ url_for('static', filename='change_interview_details.js') }}"></script>
+</body>
+</html>

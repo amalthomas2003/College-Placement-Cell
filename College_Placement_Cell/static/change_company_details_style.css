@@ -1,0 +1,47 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #ebebeb;
+}
+
+.container {
+    text-align: center;
+    width: 75%;
+    max-width: 2500px;
+    padding: 20px;
+    border: 1px solid #000000;
+    border-radius: 8px;
+    background-color: #dbdbdb;
+    margin: 20px; /* Added margin for better spacing */
+}
+
+#editor {
+    width: 100%;
+    height: 600px; /* Adjust the height as needed */
+    margin-bottom: 20px;
+    padding: 10px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+    border: 1px solid #000000; /* Add border for visual separation */
+    border-radius: 8px;
+}
+
+#save-button {
+    background-color: #35424a;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#save-button:hover {
+    background-color: #293338;
+    transform: scale(1.05);
+}

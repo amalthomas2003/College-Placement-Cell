@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Applied Students</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='eligible_students_style.css') }}">
+</head>
+<body>
+    <h1>Applied Students</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Student User ID</th>
+                <th>Student Name</th>
+                <th>CGPA</th>
+                <th>Dob</th>
+                <th>Batch</th>
+
+
+
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in applied_students %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ student[1] }}</td>
+                <td>{{ student[3] }}</td>
+                <td>{{ student[4] }}</td>
+                <td>{{ student[5] }}</td>
+                <td>{{ student[6] }}</td>
+
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

@@ -1,0 +1,534 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: flex-start;
+    padding: 20px;
+}
+
+:root {
+    --primary-bg-color: #141414;
+    --primary-text-color: #DADAD9;
+    --secondary-bg-color: #6A6B83;
+    --accent-color: #640204;
+}
+
+
+.header {
+    padding: 10px;
+    background-color: var(--primary-bg-color);
+    color: var(--primary-text-color);
+    border-bottom: 1px solid var(--primary-text-color);
+    display: flex;
+    justify-content: space-between; /* Positions the brand and profile photo at the ends */
+    align-items: center; /* Vertically center items */
+}
+
+
+.user-profile .profile-wrapper {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: calc(100% + 5px); /* Position the dropdown below the profile photo */
+    left: 0;
+    background-color: var(--primary-bg-color);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.dropdown-content a {
+    color: var(--link-color);
+    padding: 8px 10px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--secondary-bg-color);
+}
+
+/* Boxes and Popups */
+.box {
+    flex: auto;
+    width: 45%;
+    min-width: 200px;
+    height: 350px;
+    background-color: #ffffff;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.box-1{
+    flex: auto;
+    width: 45%;
+    min-width: 200px;
+    height: 350px;
+    background-color: #ffffff;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.box-1:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.box-1 h2 {
+    /* Styles for the title */
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.box-1 p {
+    /* Styles for the description text */
+    flex: 1; /* Fill remaining space */
+    text-align: left; /* Align text to the left */
+    margin-top: 0; /* Remove default margin */
+    font-size: 20px;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+    
+}
+
+.popup-content {
+    background-color: #ffffff;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 600px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    opacity: 1;
+    transform: scale(1);
+    transition: all 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between; /* Align items at each end */
+    align-items: center; /* Vertically center items */
+}
+
+.brand h1 {
+    font-weight: bold;
+    font-size: 30px; /* Adjust the font size as needed */
+    margin: 0; /* Remove default margin */
+}
+
+.profile-photo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 0; 
+    margin-right: 0px;
+    transition: all 0.3s ease;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile .profile-wrapper {
+    display: flex;
+    align-items: center; /* Vertically center items */
+}
+
+.profile-photo {
+    margin-right: 20px;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 0; /* Push the profile photo to the right */
+    cursor: pointer;
+}
+
+.company-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.company-email {
+    color: #DADAD9;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+
+
+.popup-content h2 {
+    margin-bottom: 20px;
+    font-size: 28px;
+    color: #35424a;
+}
+
+.popup-content textarea {
+    width: calc(100% - 40px); /* Adjusted width */
+    margin-bottom: 20px; /* Added margin */
+    padding: 10px; /* Added padding */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    resize: vertical; /* Allowing vertical resizing */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: #35424a;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.form-group input {
+    width: calc(100% - 20px);
+    margin-bottom: 30px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #35424a;
+    box-shadow: 0px 0px 10px rgba(53, 66, 74, 0.5);
+}
+
+.save-button {
+    background-color: #35424a;
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    padding: 15px 25px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.save-button:hover {
+    background-color: #293338;
+    transform: scale(1.05);
+}
+
+.button-28 {
+    appearance: none;
+    background-color: transparent;
+    border: 2px solid #293338;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: #3B3B3B;
+    cursor: pointer;
+    display: inline-block;
+    font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 600;
+    line-height: normal;
+    margin: auto;
+    min-height: 0px;
+    min-width: 0;
+    outline: none;
+    padding: 12px 20px;
+    text-align: center;
+    text-decoration: none;
+    transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: 90%;
+    will-change: transform;
+  }
+  
+  .button-28:disabled {
+    pointer-events: none;
+  }
+  
+  .button-28:hover {
+    color: #fff;
+    background-color: #293338;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+    transform: translateY(-2px);
+  }
+  
+  .button-28:active {
+    box-shadow: none;
+    transform: translateY(0);
+  }
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body {
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.header-logo {
+    width: 70px; 
+    height: auto;
+    margin-right: 10px;
+}
+
+.header-right {
+    margin-left: auto;
+}
+
+.header-right-logo {
+    width: 70px; 
+    height: auto; 
+}
+
+#dashboard-container {
+    display: flex;
+    flex: 1;
+}
+
+#sidebar {
+    width: 25%;
+    min-width: 200px;
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#right-section .row {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: auto;
+}
+
+.top-column {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+.row {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.dashboard-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+#user-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#user-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+#sidebar p {
+    margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        width: 100%; 
+        min-width: 0;
+    }
+}
+
+.compartment {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.container {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Ripple Button Styles */
+.btn1 {
+    position: relative;
+    display: inline-block;
+    padding: 18px 36px;
+    margin: 10px;
+    color: #fff;
+    font-size: 1.6rem; 
+    letter-spacing: 2px;
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-sizing: border-box;
+    min-width: 250px; 
+    width: calc(100% - 40px); 
+}
+
+.btn1--ripple {
+    background: linear-gradient(90deg, #0162c8, #55e7fc);
+    overflow: hidden;
+}
+
+.btn1--ripple span {
+    position: absolute;
+    background: #fff;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    border-radius: 50%;
+    animation: rippleAnimation 1s linear infinite;
+}
+
+/*Normal Buttons*/
+.btn {
+    transition: all 0.3s ease-in-out;
+    font-family: "Dosis", sans-serif;
+}
+  
+.btn {
+    width: 90px;
+    height: 30px;
+    border-radius: 5px;
+    background-image: linear-gradient(135deg, #ec580f 0%, #ef0909 100%);
+    box-shadow: 0 20px 30px -6px rgba(238, 103, 97, 0.5);
+    outline: none;
+    cursor: pointer;
+    border: none;
+    font-size: 18px;
+    color: white;
+}
+  
+.btn:hover {
+    transform: translateY(3px);
+    box-shadow: none;
+}
+  
+.btn:active {
+    opacity: 0.5;
+}
+
+
+#powerButton.button-28 {
+    background: linear-gradient(90deg, rgb(255, 255, 153), rgb(144, 238, 144), rgb(255, 255, 153));
+    /* Add any other styles you may need */
+    transition: background 0.3s ease;
+}
+
+#powerButton.button-28:hover {
+    background: black;
+}

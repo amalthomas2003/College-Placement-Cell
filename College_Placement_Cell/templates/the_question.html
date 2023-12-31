@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='myquestions_style.css') }}">
+    <title>Question Container</title>
+</head>
+<body>
+
+    <div class="question-container">
+        <p class="question-text">{{the_question | safe}}</p>
+    </div>
+
+</body>
+</html>
