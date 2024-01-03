@@ -239,7 +239,7 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS log_table (
     id INT AUTO_INCREMENT PRIMARY KEY,
     userid VARCHAR(255),
-    designation VARCHAR(255)
+    designation VARCHAR(255),
     login_date VARCHAR(255),
     login_time VARCHAR(255)
 )
