@@ -17,7 +17,7 @@ Requirements:
 
 -Python 3.7
 
--pip                       (Usually installed with python by default.Type``` pip --version ```in terminal to confirm the same. If not installed install pip)
+-pip                       (Usually preinstalled with python .Type``` pip --version ```in terminal to confirm the same. If not installed, install pip first)
 
 
 -Latest MySql
