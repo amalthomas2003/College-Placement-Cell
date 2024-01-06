@@ -210,3 +210,17 @@ section h2 {
   width: 25%;
   height: auto;
 }
+
+.larger-box {
+  font-size: 25px; /* Adjust the font size for this specific box */
+}
+
+.larger-box label {
+  font-size: 25px; /* Adjust the font size for the label inside this box */
+}
+
+.larger-input {
+  width: 200px; /* Adjust the width of the input box */
+  padding: 8px; /* Add padding for better appearance */
+  font-size: 16px; /* Adjust the font size for the input box */
+}

@@ -100,6 +100,7 @@ def login():
             if role == 'student':
                 return redirect(url_for('student_dashboard'))
             elif role == 'college_admin':
+                session['year']=datetime.now().year
                 return redirect(url_for('college_admin_dashboard'))
             elif role == 'company_hr':
                 return redirect(url_for('company_hr_dashboard'))
@@ -183,7 +184,7 @@ def upload():
 @app.route('/college_admin_dashboard')
 def college_admin_dashboard():
     if 'user_id' in session and session['role'] == 'college_admin':
-        return render_template("college_admin_dashboard.html")
+        return render_template("college_admin_dashboard.html",year=session['year'])
     
     else:
         return redirect(url_for('login'))
@@ -692,11 +693,25 @@ def logout():
 ############################################admin dashboard starts here##############
 
 
-
 @app.route("/college_admin_dashboard_main", endpoint="college_admin_dashboard_main_endpoint")
 @admin_required
 def college_admin_dashboard():
-    return render_template('college_admin_dashboard.html')
+    print(session['year'])
+
+    
+    return render_template('college_admin_dashboard.html',year=session['year'])
+
+
+
+@app.route('/college_admin_dashboard_main/set_year', methods=['POST'])
+def set_year():
+    if request.method == 'POST':
+        year = request.form.get('year')
+        if year is not None:
+            session['year'] = int(year)
+            return redirect(url_for('college_admin_dashboard'))
+    return 'Invalid request'
+
 
 def generate_bar_graph1(respective_company_placements):
 
@@ -724,66 +739,79 @@ def generate_bar_graph1(respective_company_placements):
 @app.route('/admin_dashboard/companies/general_report',endpoint="company_general_report_endpoint")
 @admin_required
 def company_general_report():
+    print(session['year'])
+
 
 
     total_no_of_recruiting_companies=len(details.company_hr_userid_ends_with())
     cursor=mysql.connection.cursor()
-    cursor.execute("""SELECT company_name, COUNT(*) AS accepted_students_count
-                    FROM applied_companies
-                    WHERE application_status = 1
-                    GROUP BY company_name
-                    HAVING COUNT(*) = (
-                        SELECT COUNT(*) AS max_count
-                        FROM applied_companies
-                        WHERE application_status = 1
-                        GROUP BY company_name
-                        ORDER BY max_count DESC
-                        LIMIT 1)
+
+    cursor.execute("""
+    SELECT ac.company_name, COUNT(*) AS accepted_students_count
+    FROM applied_companies ac
+    JOIN student_details sd ON ac.user_id = sd.userid
+    WHERE ac.application_status = 1 AND sd.graduation_year = %s
+    GROUP BY ac.company_name
+    HAVING COUNT(*) = (
+        SELECT COUNT(*) AS max_count
+        FROM applied_companies ac_inner
+        JOIN student_details sd_inner ON ac_inner.user_id = sd_inner.userid
+        WHERE ac_inner.application_status = 1 AND sd_inner.graduation_year = %s
+        GROUP BY ac_inner.company_name
+        ORDER BY max_count DESC
+        LIMIT 1)
+""", (session['year'], session['year']))
 
 
-    """)
     top_recruiter=cursor.fetchall()
           
           
     placement_counts = []
     #for each company mentioned in details.company_list find the number of students who got placed
     for company in details.company_list:
-        query = (
-            "SELECT COUNT(*) FROM applied_companies "
-            "WHERE company_name = %s AND application_status = 1"
-        )
-        cursor.execute(query, (company,))
+        query = ("""SELECT COUNT(*) FROM applied_companies ac 
+    JOIN student_details sd ON ac.user_id = sd.userid 
+    WHERE ac.company_name = %s AND ac.application_status = 1 AND sd.graduation_year = %s""")
+        cursor.execute(query, (company,session['year']))
         placement_count = cursor.fetchone()[0]
         placement_counts.append(placement_count)
         
     #select the bottom recruiting company
           
-    cursor.execute("""SELECT company_name, COUNT(*) AS accepted_students_count
-                FROM applied_companies
-                WHERE application_status = 1
-                GROUP BY company_name
-                HAVING COUNT(*) = (
-                    SELECT COUNT(*) AS max_count
-                    FROM applied_companies
-                    WHERE application_status = 1
-                    GROUP BY company_name
-                    ORDER BY max_count 
-                    LIMIT 1)
+    cursor.execute("""
+    SELECT ac.company_name, COUNT(*) AS accepted_students_count
+    FROM applied_companies ac
+    JOIN student_details sd ON ac.user_id = sd.userid
+    WHERE ac.application_status = 1 AND sd.graduation_year = %s
+    GROUP BY ac.company_name
+    HAVING COUNT(*) = (
+        SELECT COUNT(*) AS max_count
+        FROM applied_companies ac_inner
+        JOIN student_details sd_inner ON ac_inner.user_id = sd_inner.userid
+        WHERE ac_inner.application_status = 1 AND sd_inner.graduation_year = %s
+        GROUP BY ac_inner.company_name
+        ORDER BY max_count 
+        LIMIT 1)
+""", (session['year'], session['year']))
 
 
-    """)
+
     bottom_recruiter=cursor.fetchall()
     #select top acceptence rate
     cursor.execute("""
         WITH RecruitmentData AS (
             SELECT 
-                company_name,
-                SUM(CASE WHEN application_status = 1 THEN 1 ELSE 0 END) /
+                ac.company_name,
+                SUM(CASE WHEN ac.application_status = 1 AND sd.graduation_year = %s THEN 1 ELSE 0 END) /
                 NULLIF(COUNT(*), 0) * 100 AS recruitment_percentage
             FROM 
-                applied_companies
+                applied_companies ac
+            JOIN 
+                student_details sd ON ac.user_id = sd.userid
+            WHERE
+                sd.graduation_year = %s
             GROUP BY 
-                company_name
+                ac.company_name
         )
 
         SELECT 
@@ -793,20 +821,25 @@ def company_general_report():
             RecruitmentData
         WHERE 
             recruitment_percentage = (SELECT MAX(recruitment_percentage) FROM RecruitmentData);
-    """)
+    """, (session['year'], session['year']))
+
     top_acceptance_rate = cursor.fetchall()
 
     # Fetch bottom acceptance rate data from MySQL
     cursor.execute("""
         WITH RecruitmentData AS (
             SELECT 
-                company_name,
-                SUM(CASE WHEN application_status = 1 THEN 1 ELSE 0 END) /
+                ac.company_name,
+                SUM(CASE WHEN ac.application_status = 1 AND sd.graduation_year = %s THEN 1 ELSE 0 END) /
                 NULLIF(COUNT(*), 0) * 100 AS recruitment_percentage
             FROM 
-                applied_companies
+                applied_companies ac
+            JOIN 
+                student_details sd ON ac.user_id = sd.userid
+            WHERE
+                sd.graduation_year = %s
             GROUP BY 
-                company_name
+                ac.company_name
         )
 
         SELECT 
@@ -816,7 +849,8 @@ def company_general_report():
             RecruitmentData
         WHERE 
             recruitment_percentage = (SELECT MIN(recruitment_percentage) FROM RecruitmentData);
-    """)
+    """, (session['year'], session['year']))
+
     bottom_acceptance_rate = cursor.fetchall()
     top_acceptance_rate_companies=list(map(lambda x:x[0],top_acceptance_rate ))
     bottom_acceptance_rate_companies=list(map(lambda x:x[0],bottom_acceptance_rate ))
@@ -833,6 +867,7 @@ def company_general_report():
         bottom_recruiter=",".join(i[0] for i in bottom_recruiter)
 
     except:
+        print(top_acceptance_rate,bottom_acceptance_rate,top_acceptance_rate_companies,bottom_acceptance_rate_companies,bottom_recruiter,top_recruiter,sep="-----------")
         return render_template("nothing_to_show.html")
 
     cursor.close()
@@ -873,15 +908,25 @@ def generate_bar_graph(total_no_of_students,total_no_of_applied_students,total_n
 def student_general_report():
 
     cursor=mysql.connection.cursor()
-    cursor.execute("SELECT COUNT(DISTINCT userid)  FROM student_details")
+    cursor.execute("SELECT COUNT(DISTINCT userid) FROM student_details WHERE graduation_year = %s", (session['year'],))
 
     total_no_of_students=cursor.fetchall()
 
-    cursor.execute("SELECT COUNT(DISTINCT user_id)  FROM applied_companies")
+    cursor.execute("""
+        SELECT COUNT(DISTINCT ac.user_id)  
+        FROM applied_companies ac
+        JOIN student_details sd ON ac.user_id = sd.userid
+        WHERE sd.graduation_year = %s
+    """, (session['year'],))
 
     total_no_of_applied_students=cursor.fetchall()
 
-    cursor.execute("SELECT COUNT( DISTINCT user_id)  FROM applied_companies WHERE application_status = 1")
+    cursor.execute("""
+        SELECT COUNT(DISTINCT ac.user_id)
+        FROM applied_companies ac
+        JOIN student_details sd ON ac.user_id = sd.userid
+        WHERE ac.application_status = 1 AND sd.graduation_year = %s
+    """, (session['year'],))
 
     total_no_of_placed_students=cursor.fetchall()
 
@@ -1005,25 +1050,29 @@ def student_individual_report():
 
     cur.execute("""
         SELECT s.userid, s.name, COUNT(ac.company_name) AS num_applied,
-                 SUM(ac.application_status = 1) AS num_placed,
-                 SUM(ac.application_status = 0) AS num_rejected,
-                s.batch,ac.company_name,ac.application_status
-                 FROM student_details s LEFT JOIN applied_companies ac
-                 ON s.userid = ac.user_id GROUP BY s.userid, s.name, s.batch, ac.company_name, ac.application_status;
+                SUM(ac.application_status = 1) AS num_placed,
+                SUM(ac.application_status = 0) AS num_rejected,
+                s.batch, ac.company_name, ac.application_status
+        FROM student_details s 
+        LEFT JOIN applied_companies ac ON s.userid = ac.user_id
+        WHERE s.graduation_year = %s
+        GROUP BY s.userid, s.name, s.batch, ac.company_name, ac.application_status;
+    """, (session['year'],))
 
-    """)
 
 
     data = cur.fetchall()
     cur.execute("""
-    SELECT s.userid, s.name, COUNT(ac.company_name) AS num_applied,
-                SUM(ac.application_status = 1) AS num_placed,
-                SUM(ac.application_status = 0) AS num_rejected,
+        SELECT s.userid, s.name, COUNT(ac.company_name) AS num_applied,
+            SUM(ac.application_status = 1) AS num_placed,
+            SUM(ac.application_status = 0) AS num_rejected,
             s.batch
-                FROM student_details s LEFT JOIN applied_companies ac
-                ON s.userid = ac.user_id GROUP BY s.userid, s.name, s.batch;
+        FROM student_details s 
+        LEFT JOIN applied_companies ac ON s.userid = ac.user_id
+        WHERE s.graduation_year = %s
+        GROUP BY s.userid, s.name, s.batch;
+    """, (session['year'],))
 
-    """)
     
     data1=cur.fetchall()
     cur.close()
@@ -1096,9 +1145,11 @@ def branch_individual_report():
             SELECT  COUNT(ac.company_name) AS num_applied,
                     SUM(ac.application_status = 1) AS num_placed,
                     SUM(ac.application_status = 0) AS num_rejected
-            FROM student_details s LEFT JOIN applied_companies ac
-            ON s.userid = ac.user_id WHERE s.batch=%s
-        """, (i,))
+            FROM student_details s 
+            LEFT JOIN applied_companies ac ON s.userid = ac.user_id 
+            WHERE s.graduation_year = %s AND s.batch = %s;
+        """, (session['year'], i))
+
 
         data = cur.fetchone()+(i,)
         branch_individual_report.append(data)

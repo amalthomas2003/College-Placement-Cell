@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='student_dashboard_style.css') }}">
 </head>
 <body>
+    <style>
+        .home-image {
+        width: 50px; 
+        height: auto;
+    }
+
+    </style>
 
     <div id="header">
         <div class="header-left">
@@ -16,7 +23,9 @@
             <img src="{{ url_for('static', filename='Career connect.png') }}" alt="Logo 2" class="header-logo">
         </div>
     </div>
-
+    <button class="home-button" onclick="redirectToHome()">
+        <img class="home-image" src="{{ url_for('static', filename='home.png') }}" alt="Home Icon"> 
+    </button>
 
     <div class="container">
         <h1>Eligible Companies</h1>
@@ -48,4 +57,9 @@
     <script src="static/studash.js"></script>
 
 </body>
+<script>
+    function redirectToHome(){
+        window.location.href = "/student_dashboard"
+    }
+</script>
 </html>

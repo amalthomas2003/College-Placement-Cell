@@ -125,6 +125,18 @@
         <section>
             <h2>Dashboard</h2>
             <div class="container">
+                <div class="box larger-box">
+                    <form action="/college_admin_dashboard_main/set_year" method="post">
+                        <label for="yearInput">Enter Year:</label>
+                        <br>
+                        <br>
+                        <input type="number" id="yearInput" name="year" class="larger-input" placeholder="{{ year }}" required>
+                        <br>
+                        <br>
+                        <button type="submit" class="button-28">APPLY</button>
+                    </form>
+                </div>
+                
                 <div class="box">
                     <h3>Student</h3>
                     <p>General Report</p>

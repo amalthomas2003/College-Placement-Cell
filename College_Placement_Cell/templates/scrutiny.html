@@ -23,6 +23,18 @@
             margin-right: 20px; /* Adjust the margin between the text and button */
         }
 
+        .home-button {
+            background:greenyellow;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .home-image {
+            width: 50px; /* Adjust the size of the home image */
+            height: auto;
+        }
+
         #downloadButton {
             padding: 20px 20px; /* Adjust padding for height and width */
             background-color: rgb(0, 41, 247);
@@ -60,12 +72,14 @@
             background-color: yellow;
             color: black;
         }
-
     </style>
 </head>
 <body>
 
 <h1>Application Scrutiny</h1>
+<button class="home-button" onclick="redirectToHome()">
+    <img class="home-image" src="{{ url_for('static', filename='home.png') }}" alt="Home Icon"> 
+</button>
 <!-- Add a button to trigger the download -->
 <button id="downloadButton">Download Table</button>
 
@@ -136,4 +150,10 @@
 </table>
 
 </body>
+
+<script>
+    function redirectToHome(){
+        window.location.href = "/company_hr_dashboard"
+    }
+</script>
 </html>
