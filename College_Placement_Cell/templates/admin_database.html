@@ -1,1 +1,22 @@
-Coming in later version
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Upload and Database Delete</title>
+</head>
+<body>
+    <h1>CSV Upload and Database Delete</h1>
+
+    <form action="/admin_dashboard/upload_student_details_csv" method="post" enctype="multipart/form-data">
+        <label for="file">Choose CSV file to upload:</label>
+        <input type="file" name="file" accept=".csv">
+        <button type="submit">Upload</button>
+    </form>
+
+    <form action="/admin_dashboard/delete_table" method="post">
+        <button type="submit">Delete Database</button>
+    </form>
+</body>
+</html>

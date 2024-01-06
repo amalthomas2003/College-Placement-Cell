@@ -127,7 +127,9 @@ cursor.execute("""
         applied_companies VARCHAR(255),
         graduation_year INT,
         accepted_companies VARCHAR(255),
-        rejected_companies VARCHAR(255)
+        rejected_companies VARCHAR(255),
+        student_pfp MEDIUMBLOB
+        
     )
 """)
 

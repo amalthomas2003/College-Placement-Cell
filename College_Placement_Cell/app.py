@@ -8,7 +8,11 @@ import matplotlib.pyplot as plt  #importing pyplot as alias plt for bar graph
 import io #Used as a virtual Storage for graph png
 import matplotlib # used to create graph (png formant in this project)
 import base64  #Used to convert baseIO stored images into ASCII text during graph creation
+import csv #to work with csv files
 matplotlib.use('Agg')  # Use the Agg backend (non-interactive) to remove main loop errors
+
+
+
 
 current_date = date.today()
 current_date_str = current_date.strftime('%Y-%m-%d') #in yyyy-mm-dd format
@@ -113,40 +117,68 @@ def student_images(filename):
 #the rank is calculted by the details module
 #Other values such as  uid, name , dob , student image etc are also fetched 
 
-
-@app.route('/student_dashboard',methods=["GET","POST"])
+@app.route('/student_dashboard', methods=["GET", "POST"])
 def student_dashboard():
     if 'user_id' in session and session['role'] == 'student':
-        cursor=mysql.connection.cursor()
-        cursor.execute("SELECT name,cgpa,dob,batch,points,graduation_year FROM student_details WHERE userid = %s", (session["user_id"],))
-        details_of_student_for_session_dict=cursor.fetchone()
-        session['student_name']=details_of_student_for_session_dict[0]
-        session['cgpa']=details_of_student_for_session_dict[1]
-        session['dob']=details_of_student_for_session_dict[2]
-        session['batch']=details_of_student_for_session_dict[3]
-        session['graduation_year']=details_of_student_for_session_dict[5]
+        cursor = mysql.connection.cursor()
+        cursor.execute("SELECT name,cgpa,dob,batch,points,graduation_year,student_pfp FROM student_details WHERE userid = %s", (session["user_id"],))
+        details_of_student_for_session_dict = cursor.fetchone()
+        session['student_name'] = details_of_student_for_session_dict[0]
+        session['cgpa'] = details_of_student_for_session_dict[1]
+        session['dob'] = details_of_student_for_session_dict[2]
+        session['batch'] = details_of_student_for_session_dict[3]
+        session['graduation_year'] = details_of_student_for_session_dict[5]
+        session['student_pfp'] = base64.b64encode(details_of_student_for_session_dict[6]).decode('utf-8') if details_of_student_for_session_dict[6] else "hi"
+        
         query = "SELECT COUNT(*) AS question_count FROM questions WHERE userid = %s AND status = 1"
         cursor.execute(query, (session['user_id'],))
-
+        print(type(session['dob']))
+        print(type(session['cgpa']))
         result = cursor.fetchone()
         session['cc_points'] = result[0]
-        cursor.execute("UPDATE student_details SET points = %s WHERE userid = %s",(session['cc_points'],session['user_id']))
+        cursor.execute("UPDATE student_details SET points = %s WHERE userid = %s", (session['cc_points'], session['user_id']))
         mysql.connection.commit()
         cursor.close()
         return render_template(
-            'student_dashboard.html', 
+            'student_dashboard.html',
             student_name=session['student_name'],
             student_uid=session['user_id'],
             student_dob=session['dob'],
             student_cgpa=session['cgpa'],
             student_branch=session['batch'],
-            student_image=session['user_id'][0:8]+'.jpeg',
-            cc_points=session['cc_points']
-            
-            )
+            student_image=session['student_pfp'],
+            cc_points=session['cc_points'],
+            student_pfp=session['student_pfp']
+        )
     else:
         return redirect(url_for('login'))
+
+
+@app.route('/upload', methods=['POST'])
+def upload():
+    if 'file' not in request.files:
+        return redirect('/')
     
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect('/')
+
+    # Read image data
+    image_data = file.read()
+
+
+    # Save image data to the database
+    cursor = mysql.connection.cursor()
+
+    cursor.execute("UPDATE student_details SET student_pfp = %s WHERE userid = %s", (image_data, session['user_id']))
+    mysql.connection.commit()
+    cursor.close()
+    return redirect(url_for('student_dashboard'))
+
+
+
+
 #Initial Route for College Admin after login
 @app.route('/college_admin_dashboard')
 def college_admin_dashboard():
@@ -432,8 +464,9 @@ def process_decision():
 @app.route('/student_dashboard/eligible_companies', endpoint="eligible_companies_endpoint")
 @student_required
 def eligible_companies():
+    print(session)
     cur = mysql.connection.cursor()
-
+    print(session['dob'])
     if details.is_valid_date(session['dob']):
         pass
     else:
@@ -787,17 +820,20 @@ def company_general_report():
     bottom_acceptance_rate = cursor.fetchall()
     top_acceptance_rate_companies=list(map(lambda x:x[0],top_acceptance_rate ))
     bottom_acceptance_rate_companies=list(map(lambda x:x[0],bottom_acceptance_rate ))
-    top_acceptance_rate,bottom_acceptance_rate=[top_acceptance_rate[0][1],100-top_acceptance_rate[0][1]],[bottom_acceptance_rate[0][1],100-bottom_acceptance_rate[0][1]]
-    top_acceptance_rate_companies=" , ".join(top_acceptance_rate_companies)
-    bottom_acceptance_rate_companies=" , ".join(bottom_acceptance_rate_companies)
-    top_recruiter_number=top_recruiter[0][1]
-    top_recruiter=",".join(i[0] for i in top_recruiter)
+    try:
+        top_acceptance_rate,bottom_acceptance_rate=[top_acceptance_rate[0][1],100-top_acceptance_rate[0][1]],[bottom_acceptance_rate[0][1],100-bottom_acceptance_rate[0][1]]
     
-    
-    bottom_recruiter_number=bottom_recruiter[0][1]
-    bottom_recruiter=",".join(i[0] for i in bottom_recruiter)
+        top_acceptance_rate_companies=" , ".join(top_acceptance_rate_companies)
+        bottom_acceptance_rate_companies=" , ".join(bottom_acceptance_rate_companies)
+        top_recruiter_number=top_recruiter[0][1]
+        top_recruiter=",".join(i[0] for i in top_recruiter)
+        
+        
+        bottom_recruiter_number=bottom_recruiter[0][1]
+        bottom_recruiter=",".join(i[0] for i in bottom_recruiter)
 
-    
+    except:
+        return render_template("nothing_to_show.html")
 
     cursor.close()
     return render_template('companies.html',total_no_of_recruiting_companies=total_no_of_recruiting_companies,
@@ -849,7 +885,10 @@ def student_general_report():
 
     total_no_of_placed_students=cursor.fetchall()
 
-    pp=round(total_no_of_placed_students[0][0]/total_no_of_applied_students[0][0]*100,2)
+    try:
+        pp=round(total_no_of_placed_students[0][0]/total_no_of_applied_students[0][0]*100,2)
+    except:
+        return render_template("nothing_to_show.html")
 
 
 
@@ -1079,7 +1118,7 @@ def branch_individual_report():
 def log_table():
 
     cursor = mysql.connection.cursor()
-    cursor.execute("SELECT * FROM log_table")
+    cursor.execute("SELECT * FROM log_table ORDER BY id DESC")
     log_entries = cursor.fetchall()
     cursor.close()
     return render_template('log_table.html',log_entries=log_entries)
@@ -1089,6 +1128,75 @@ def log_table():
 def admin_logout():
     session.clear()
     return redirect(url_for("login"))
+
+
+
+
+@app.route('/admin_dashboard/upload_student_details_csv', methods=['POST'],endpoint="upload_student_details_csv_endpoint")
+def upload():
+    if 'file' not in request.files:
+        return redirect(request.url)
+    
+    file = request.files['file']
+
+    if file.filename == '':
+        return redirect(request.url)
+
+    if file:
+        # Read CSV file and insert data into the database
+        csv_data = csv.reader(file.stream.read().decode('utf-8').splitlines())
+        next(csv_data)  # Skip header row
+
+        cur = mysql.connection.cursor()
+
+        for row in csv_data:
+            userid, password, name, cgpa, dob, batch, points, graduation_year = row
+            cur.execute("INSERT INTO student_details (userid, password, name, cgpa, dob, batch, points, graduation_year) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                           (userid, password, name, cgpa, dob, batch, points, graduation_year))
+
+            cur.execute("INSERT INTO student_login (userid, password) VALUES (%s,%s)",(userid, password))
+
+        mysql.connection.commit()
+        cur.close()
+
+        return redirect(url_for('college_admin_dashboard'))
+
+@app.route('/admin_dashboard/delete_table', methods=['POST'],endpoint="admin_delte_table")
+def delete_database():
+    cur = mysql.connection.cursor()
+    cur.execute("DROP TABLE student_details")
+    cur.execute("DROP TABLE student_login")
+    mysql.connection.commit()
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS student_details (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    userid VARCHAR(50) NOT NULL,
+                    password VARCHAR(50) NOT NULL,
+                    name VARCHAR(255) NOT NULL,
+                    cgpa FLOAT NOT NULL,
+                    dob DATE NOT NULL,
+                    batch VARCHAR(50) NOT NULL,
+                    points INT NOT NULL,
+                    applied_companies VARCHAR(255),
+                    graduation_year INT,
+                    accepted_companies VARCHAR(255),
+                    rejected_companies VARCHAR(255),
+                    student_pfp MEDIUMBLOB
+                    
+                )
+            """)
+    cur.execute("""
+                CREATE TABLE IF NOT EXISTS student_login (
+                    id INT AUTO_INCREMENT PRIMARY KEY,
+                    userid VARCHAR(50) NOT NULL,
+                    password VARCHAR(50) NOT NULL
+                )
+            """)
+    cur.close()
+    return redirect(url_for('college_admin_dashboard'))
+
+
+
 
 #define in later version
 @app.route('/admin_dashboard/database' , endpoint="admin_database_endpoint")

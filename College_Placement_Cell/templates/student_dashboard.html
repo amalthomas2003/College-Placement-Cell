@@ -21,7 +21,20 @@
     <div id="dashboard-container">
         <div id="sidebar">
             <div id="user-details">
-                <img id="user-image" src="{{ url_for('student_images', filename=student_image) }}" alt="User Image" style="width: 175px; height: 175px; object-fit: cover; border-radius: 50%;">
+                {% if student_pfp %}
+                <img src="data:image/jpeg;base64,{{ student_pfp }}" alt="Uploaded Image" class="header-logo2" id="profile-picture">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+        
+                <form action="/upload" method="post" enctype="multipart/form-data" style="text-align: center;">
+                    <label for="file-input" style="display: block; margin-bottom: 10px;">Edit Profile Picture</label>
+                    <input type="file" name="file" accept="image/*" id="file-input" style="display: none;">
+                    <button type="button" onclick="document.getElementById('file-input').click();" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Choose Image</button>
+                    <span id="uploaded-file" style="display: block; margin-top: 10px;"></span>
+                    <button type="submit" id="submit_button" style="padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Upload Image</button>
+                </form>
+                
                 <p><strong>UID:</strong> <span id="name">{{student_uid}}</span></p>
                 <p><strong>NAME:</strong> <span id="name">{{student_name | upper}}</span></p>
                 <p><strong>BRANCH:</strong> <span id="branch">{{student_branch | upper}}</span></p>
@@ -36,7 +49,6 @@
             
                 <div class="row">
                     <button class="btn1 btn1--ripple" id="ripple" onclick="redirectToEligibleCompanies()">Eligible Companies</button>
-
                 </div> 
     
                 <div class="row">   
@@ -56,14 +68,48 @@
                 </div>
             </div>
         </div>
-        
     </div>
 
     <script src="static/studash.js"></script>
+    <script>
+        document.getElementById('file-input').addEventListener('change', function (event) {
+            const fileInput = event.target;
+            const file = fileInput.files[0];
+
+            // Check if the file size is below 50 KB
+            const maxSizeKB = 50;
+            if (file.size > maxSizeKB * 1024) {
+                alert('Error: Image size exceeds the allowed limit of 50 KB.');
+                fileInput.value = '';  // Clear the file input
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                const img = new Image();
+                img.src = e.target.result;
+
+                img.onload = function () {
+                    const canvas = document.createElement('canvas');
+                    const ctx = canvas.getContext('2d');
+
+                    // Resize the image to a maximum width or height
+                    const maxWidthOrHeight = 200; // Adjust as needed
+                    const scale = Math.min(maxWidthOrHeight / img.width, maxWidthOrHeight / img.height);
+
+                    canvas.width = img.width * scale;
+                    canvas.height = img.height * scale;
+
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+                    // Update the profile picture with the resized image
+                    document.getElementById('profile-picture').src = canvas.toDataURL('image/jpeg', 0.7); // Adjust quality as needed
+                };
+            };
+
+            reader.readAsDataURL(file);
+        });
+    </script>
 </body>
 </html>
-
-
-
-
-

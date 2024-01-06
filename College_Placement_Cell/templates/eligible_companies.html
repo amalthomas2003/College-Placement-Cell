@@ -3,10 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eligible Companies</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='eligible_companies_style.css') }}">
+    <title>Student Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='student_dashboard_style.css') }}">
 </head>
 <body>
+
+    <div id="header">
+        <div class="header-left">
+            <img src="{{ url_for('static', filename='plment.png') }}" alt="Logo 1" class="header-logo">
+        </div>
+        <div class="header-right">
+            <img src="{{ url_for('static', filename='Career connect.png') }}" alt="Logo 2" class="header-logo">
+        </div>
+    </div>
+
+
     <div class="container">
         <h1>Eligible Companies</h1>
         <ul class="company-list">
@@ -21,11 +32,11 @@
                             <button type="submit" name="action" value="see_interview_details">Interview Details</button>
                         </form>
                         {% else %}
-                        <form action="{{ url_for('handle_application') }}" method="post" style="display: inline;">
+                        <form action="{{ url_for('handle_application_endpoint') }}" method="post" style="display: inline;">
                             <input type="hidden" name="company_name" value="{{ company }}">
                             <button type="submit" name="action" value="apply">Apply</button>
                         </form>
-                        <form action="{{ url_for('view_interview_details') }}" method="post" style="display: inline;">
+                        <form action="{{ url_for('view_interview_details_endpoint') }}" method="post" style="display: inline;">
                             <input type="hidden" name="company_name" value="{{ company }}">
                             <button type="submit" name="action" value="see_interview_details">Interview Details</button>
                         </form>
@@ -34,5 +45,7 @@
             {% endfor %}
         </ul>
     </div>
+    <script src="static/studash.js"></script>
+
 </body>
 </html>
