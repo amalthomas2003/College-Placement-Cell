@@ -166,11 +166,11 @@ cursor.execute("""
 
 
 questions_data=[
-    ('oop,data structures,uml','u2109008@rajagiri.edu.in','Amal Thomas',"what is you name ?2@#$#@",0,"2023-12-12","tcs"),
-    ('oop,data structures,uml','u2109008@rajagiri.edu.in','Amal Thomas',"what is you name ?2@#$#@",1,"2023-09-09","tcs"),
-    ('oop,data structures,uml','u2109008@rajagiri.edu.in','Amal Thomas',"what is you name ?2@#$#@",0,"2023-08-09","wipro"),
-    ('oop,data structures,uml','u2109008@rajagiri.edu.in','Amal Thomas',"what is you name ?2@#$#@",1,"2023-07-09","wipro"),
-    ('akshay,sigma','akshayg@rajagiri.edu.in','akshay',"My name is GG",1,"2023-09-23","tcs")
+    ('oop,data structures,uml','u2109008@rajagiri.edu.in','Amal Thomas',"What is DSA?Explain.",0,"2023-12-12","tcs"),
+    ('oop,data structures,uml','u2109008@rajagiri.edu.in','Amal Thomas',"What is OOP?",1,"2023-09-09","tcs"),
+    ('general','u2109008@rajagiri.edu.in','Amal Thomas',"What can you bring to the company?",0,"2023-08-09","wipro"),
+    ('general','u2109008@rajagiri.edu.in','Amal Thomas',"What are your greatest strengths",1,"2023-07-09","wipro"),
+    ('general','akshayg@rajagiri.edu.in','akshay',"What is your greatest professional achievement",1,"2023-09-23","tcs")
 ]
 
 for tags,userid,username,question,status,question_date,company_name in questions_data:

@@ -13,7 +13,7 @@ matplotlib.use('Agg')  # Use the Agg backend (non-interactive) to remove main lo
 
 
 
-
+student_pfp="hello"
 current_date = date.today()
 current_date_str = current_date.strftime('%Y-%m-%d') #in yyyy-mm-dd format
 
@@ -127,10 +127,11 @@ def student_dashboard():
         session['student_name'] = details_of_student_for_session_dict[0]
         session['cgpa'] = details_of_student_for_session_dict[1]
         session['dob'] = details_of_student_for_session_dict[2]
+        print(session['dob'])
         session['batch'] = details_of_student_for_session_dict[3]
         session['graduation_year'] = details_of_student_for_session_dict[5]
-        session['student_pfp'] = base64.b64encode(details_of_student_for_session_dict[6]).decode('utf-8') if details_of_student_for_session_dict[6] else "hi"
-        
+        global student_pfp
+        student_pfp = base64.b64encode(details_of_student_for_session_dict[6]).decode('utf-8') if details_of_student_for_session_dict[6] else "hi"
         query = "SELECT COUNT(*) AS question_count FROM questions WHERE userid = %s AND status = 1"
         cursor.execute(query, (session['user_id'],))
         print(type(session['dob']))
@@ -147,9 +148,9 @@ def student_dashboard():
             student_dob=session['dob'],
             student_cgpa=session['cgpa'],
             student_branch=session['batch'],
-            student_image=session['student_pfp'],
+            student_image=student_pfp,
             cc_points=session['cc_points'],
-            student_pfp=session['student_pfp']
+            student_pfp=student_pfp
         )
     else:
         return redirect(url_for('login'))
@@ -552,6 +553,7 @@ def post_questions():
             cur.execute("INSERT INTO questions(tags,userid,username,question,status,question_date,company_name) VALUES (%s,%s,%s,%s,%s,%s,%s)",(tags,session['user_id'],session['student_name'],content,2,question_date,c_name))
             mysql.connection.commit()
             cur.close()
+            print("hi")
         return redirect(url_for('student_dashboard'))
     return render_template("post_interview_questions.html")
 
@@ -1118,7 +1120,7 @@ def generate_bar_graph_branch(branches,placed_list):
     plt.bar(
             placed_list,branches,color=colors)
     plt.xlabel("<----Branch---->")
-    plt.ylabel("<----No of Placements---->")
+    plt.ylabel("<----No of Applications---->")
     plt.title("Branch Placement Graph")
 
     image_stream = io.BytesIO()
